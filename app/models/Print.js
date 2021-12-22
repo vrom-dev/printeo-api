@@ -1,14 +1,6 @@
 const { Schema, model } = require('mongoose')
 
 const printSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  printer: {
-    type: Schema.Types.ObjectId,
-    ref: 'Printer'
-  },
   color: {
     type: String,
     required: true
@@ -32,22 +24,29 @@ const printSchema = new Schema({
     type: Number,
     required: true
   },
-  shippingPrice: {
+  quantity: {
     type: Number,
-    required: true
+    required: true,
+    min: 1,
+    default: 1
   },
-  order: {
+  file: {
     type: Schema.Types.ObjectId,
-    ref: 'Order'
+    ref: 'File'
+  },
+  printer: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }
-})
+},
+{ timestamps: true }
+)
 
 printSchema.set('toJSON', {
   transform: (doc, transformedObject) => {
     transformedObject.id = transformedObject._id
     delete transformedObject._id
     delete transformedObject.__v
-    delete transformedObject.password
   }
 })
 

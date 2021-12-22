@@ -1,9 +1,18 @@
 const { Schema, model } = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
-const { validateEmail, validatePassword } = require('../utils/modelValidations')
+const { validateEmail, validateUsername } = require('../utils/modelValidations')
 
 const userSchema = new Schema({
+  username: {
+    type: String,
+    trim: true,
+    lowercase: true,
+    minlength: 4,
+    unique: true,
+    required: true,
+    validate: [validateUsername, 'Please fill a valid username']
+  },
   email: {
     type: String,
     trim: true,
@@ -15,10 +24,7 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    trim: true,
-    minlength: 8,
-    required: true,
-    validate: [validatePassword, 'Please fill a valid password']
+    required: true
   },
   name: {
     type: String,
@@ -32,36 +38,57 @@ const userSchema = new Schema({
     minlength: 1,
     required: true
   },
-  phoneNumber: {
+  phone: {
     type: Number,
     minlength: 9
   },
-  registeredAt: {
-    type: Date,
-    required: true
-  },
   address: {
-    type: String,
-    required: true
+    street: {
+      type: String,
+      required: true
+    },
+    city: {
+      type: String,
+      required: true
+    },
+    country: {
+      type: String,
+      required: true
+    },
+    zipcode: {
+      type: Number,
+      required: true,
+      length: 5
+    }
   },
-  city: {
-    type: String,
-    required: true
+  isPrinter: {
+    type: Boolean,
+    default: false
   },
-  country: {
-    type: String,
-    required: true
-  },
-  zipCode: {
-    type: Number,
-    required: true,
-    length: 5
+  printerConfig: {
+    shippingPrice: {
+      type: Number,
+      minlength: 1
+    },
+    printingPrice: {
+      type: Number,
+      minlength: 1
+    },
+    shippingTime: {
+      type: Number,
+      minlength: 1
+    }
   },
   orders: [{
     type: Schema.Types.ObjectId,
     ref: 'Order'
+  }],
+  files: [{
+    type: Schema.Types.ObjectId,
+    ref: 'File'
   }]
-})
+},
+{ timestamps: true })
 
 userSchema.plugin(uniqueValidator)
 
