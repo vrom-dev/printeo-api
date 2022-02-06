@@ -3,7 +3,13 @@ const uniqueValidator = require('mongoose-unique-validator')
 
 const { validateEmail, validateUsername } = require('../utils/modelValidations')
 
-const userSchema = new Schema({
+const printerSchema = new Schema({
+  brandName: {
+    type: String,
+    trim: true,
+    minlength: 1,
+    required: true
+  },
   email: {
     type: String,
     trim: true,
@@ -17,22 +23,17 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  name: {
-    type: String,
-    trim: true,
-    minlength: 1,
+  printingPrice: {
+    type: Number,
+    enum: ['1/2', '2/4', '3/6'],
     required: true
   },
-  firstSurname: {
-    type: String,
-    trim: true,
-    minlength: 1,
+  shippingPrice: {
+    Number,
     required: true
   },
-  secondSurname: {
-    type: String,
-    trim: true,
-    minlength: 1,
+  deliveryTime: {
+    Number,
     required: true
   },
   phone: {
@@ -61,10 +62,6 @@ const userSchema = new Schema({
   orders: [{
     type: Schema.Types.ObjectId,
     ref: 'Order'
-  }],
-  prints: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Print'
   }]
 },
   { timestamps: true })

@@ -10,7 +10,7 @@ const validatePassword = (password) => {
 }
 
 const validateUsername = (username) => {
-  const regex = /^[a-zA-Z0-9]{4}$/
+  const regex = /^[a-zA-Z0-9]{4,}$/
   return regex.test(username)
 }
 

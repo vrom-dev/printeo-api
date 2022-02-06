@@ -1,26 +1,17 @@
-const { connect, connection } = require('mongoose')
-
-const { MONGODB_CONFIG, MONGODB_URI } = require('../../config')
-const User = require('../../models/User')
-
 const getUser = async (req, res, next) => {
+  const { user } = req
   const { id } = req.params
 
-  if (!id) {
-    return next(new Error('Required request field not provided'))
+  if (!user._id.equals(id)) {
+    return next(new Error('Token not valid for this request'))
   }
 
   try {
-    await connect(MONGODB_URI, MONGODB_CONFIG)
-    const user = await User.findById(id)
-
-    if (!user) {
-      return next(new Error('Requested data not found'))
-    }
-    res.status(200).send(user)
-    connection.close()
+    res.status(200).send({
+      status: 200,
+      data: user
+    })
   } catch (e) {
-    connection.close()
     next(e)
   }
 }

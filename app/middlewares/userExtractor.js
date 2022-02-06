@@ -6,9 +6,14 @@ const User = require('../models/User')
 
 const userExtractor = async (req, res, next) => {
   const { token } = req
-  const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY)
+  let decodedToken
+  try {
+    decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY)
+  } catch (e) {
+    next(e)
+  }
 
-  if (!token || !decodedToken.id) {
+  if (!token || !decodedToken?.id) {
     return next(new Error('Token missing, expired or invalid'))
   }
   try {

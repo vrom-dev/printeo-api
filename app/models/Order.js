@@ -8,7 +8,7 @@ const orderSchema = new Schema({
   },
   printer: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'Printer'
   },
   shippingPrice: {
     type: Number,
@@ -25,7 +25,7 @@ const orderSchema = new Schema({
     required: true
   }]
 },
-{ timestamps: true }
+  { timestamps: true }
 )
 
 orderSchema.set('toJSON', {

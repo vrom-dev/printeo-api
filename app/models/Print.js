@@ -1,11 +1,11 @@
 const { Schema, model } = require('mongoose')
 
 const printSchema = new Schema({
-  color: {
+  material: {
     type: String,
     required: true
   },
-  innerPadding: {
+  innerFill: {
     type: Number,
     enum: [0.5, 0.8, 1],
     required: true
@@ -20,26 +20,16 @@ const printSchema = new Schema({
     max: 1.5,
     required: true
   },
-  price: {
-    type: Number,
-    required: true
-  },
-  quantity: {
-    type: Number,
-    required: true,
-    min: 1,
-    default: 1
-  },
   file: {
     type: Schema.Types.ObjectId,
     ref: 'File'
   },
-  printer: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   }
 },
-{ timestamps: true }
+  { timestamps: true }
 )
 
 printSchema.set('toJSON', {

@@ -9,11 +9,12 @@ const User = require('../../models/User')
 const { validatePassword } = require('../../utils/modelValidations')
 
 const createUser = async (req, res, next) => {
-  const { name, surname, email, password, address, phone } = req.body
+  const { name, firstSurname, secondSurname, email, password, address, phone } = req.body
   const { street, city, country, zipcode } = address
 
   if (!name ||
-    !surname ||
+    !firstSurname ||
+    !secondSurname ||
     !email ||
     !password ||
     !street ||
@@ -36,13 +37,14 @@ const createUser = async (req, res, next) => {
     const passwordHash = await bcrypt.hash(password, saltRounds)
     const user = new User({
       name,
-      surname,
+      firstSurname,
+      secondSurname,
       email,
       password: passwordHash,
       address,
       phone,
       orders: [],
-      files: []
+      prints: []
     })
     const newUser = await user.save()
     const userObjForToken = {
@@ -52,8 +54,10 @@ const createUser = async (req, res, next) => {
     const token = jwt.sign(userObjForToken, process.env.JWT_SECRET_KEY)
 
     res.status(201).send({
-      data: newUser,
-      accessToken: token
+      status: 201,
+      data: {
+        accessToken: token
+      }
     })
     connection.close()
   } catch (e) {

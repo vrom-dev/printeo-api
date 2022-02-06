@@ -33,6 +33,7 @@ const uploadFile = async (req, res, next) => {
     connection.close()
     res.status(201).json(newFile)
   } catch (error) {
+    await unlinkFile(req.file.path)
     return next(error)
   }
 }
