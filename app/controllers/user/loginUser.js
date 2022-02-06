@@ -1,10 +1,7 @@
-const { connect, connection } = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-
 require('dotenv').config()
 
-const { MONGODB_CONFIG, MONGODB_URI } = require('../../config')
 const User = require('../../models/User')
 
 const loginUser = async (req, res, next) => {
@@ -15,8 +12,6 @@ const loginUser = async (req, res, next) => {
   }
 
   try {
-    await connect(MONGODB_URI, MONGODB_CONFIG)
-
     const user = await User.findOne({ email })
     const passwordCorrect = user === null
       ? false
@@ -38,9 +33,9 @@ const loginUser = async (req, res, next) => {
         accessToken: token
       }
     })
-    connection.close()
+
   } catch (e) {
-    connection.close()
+
     next(e)
   }
 }

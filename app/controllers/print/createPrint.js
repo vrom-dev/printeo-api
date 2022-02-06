@@ -1,7 +1,5 @@
-const { connect, connection } = require('mongoose')
 require('dotenv').config()
 
-const { MONGODB_CONFIG, MONGODB_URI } = require('../../config')
 const Print = require('../../models/Print')
 const File = require('../../models/File')
 
@@ -28,7 +26,6 @@ const createPrint = async (req, res, next) => {
   }
 
   try {
-    await connect(MONGODB_URI, MONGODB_CONFIG)
     const print = new Print({
       material,
       innerFill: innerFill / 100,
@@ -44,9 +41,7 @@ const createPrint = async (req, res, next) => {
     })
     user.prints = user.prints.concat(newPrint._id)
     await user.save()
-    connection.close()
   } catch (e) {
-    connection.close()
     return next(e)
   }
 }

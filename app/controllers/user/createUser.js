@@ -1,10 +1,8 @@
-const { connect, connection } = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 require('dotenv').config()
 
-const { MONGODB_CONFIG, MONGODB_URI } = require('../../config')
 const User = require('../../models/User')
 const { validatePassword } = require('../../utils/modelValidations')
 
@@ -32,7 +30,6 @@ const createUser = async (req, res, next) => {
   }
 
   try {
-    await connect(MONGODB_URI, MONGODB_CONFIG)
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(password, saltRounds)
     const user = new User({
@@ -59,9 +56,7 @@ const createUser = async (req, res, next) => {
         accessToken: token
       }
     })
-    connection.close()
   } catch (e) {
-    connection.close()
     next(e)
   }
 }

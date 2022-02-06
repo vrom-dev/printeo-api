@@ -2,7 +2,8 @@ const express = require('express')
 const { PORT } = require('./config')
 const app = express()
 const cors = require('cors')
-
+const { connect } = require('mongoose')
+const { MONGODB_CONFIG, MONGODB_URI } = require('./config')
 
 // MIDDLEWARES
 const errorHandler = require('./middlewares/errorHandler')
@@ -12,6 +13,8 @@ const fileRouter = require('./routes/file')
 const printRouter = require('./routes/print')
 const userRouter = require('./routes/user')
 const orderRouter = require('./routes/order')
+
+connect(MONGODB_URI, MONGODB_CONFIG)
 
 app.use(express.json())
 app.use(cors())

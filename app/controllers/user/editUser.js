@@ -1,6 +1,3 @@
-const { connect, connection } = require('mongoose')
-
-const { MONGODB_CONFIG, MONGODB_URI } = require('../../config')
 const User = require('../../models/User')
 
 const editUser = async (req, res, next) => {
@@ -27,7 +24,6 @@ const editUser = async (req, res, next) => {
   }
 
   try {
-    await connect(MONGODB_URI, MONGODB_CONFIG)
     const fieldsToUpdate = {
       name,
       firstSurname,
@@ -41,9 +37,7 @@ const editUser = async (req, res, next) => {
       status: 200,
       data: updatedUser
     })
-    connection.close()
   } catch (e) {
-    connection.close()
     next(e)
   }
 }
