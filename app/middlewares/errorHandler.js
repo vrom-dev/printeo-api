@@ -5,7 +5,7 @@ const errorHandler = (error, req, res, next) => {
       .status(400)
       .send({ error: `${error.message}` })
   }
-  if (error.message === 'Invalid username or password') {
+  if (error.message === 'Invalid email or password') {
     return res
       .status(400)
       .send({ error: `${error.message}` })

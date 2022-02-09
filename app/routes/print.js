@@ -23,7 +23,6 @@ printRouter.get('/print',
 
 printRouter.get('/print/:id',
   tokenExtractor,
-  userExtractor,
   getPrint
 )
 

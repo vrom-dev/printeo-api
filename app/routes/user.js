@@ -8,7 +8,7 @@ const {
   getUser,
   loginUser,
   editUser,
-  checkAuthToken
+  getUserId
 } = require('../controllers/user')
 
 userRouter.post('/user/register', createUser)
@@ -16,7 +16,7 @@ userRouter.post('/user/login', loginUser)
 userRouter.get('/user/token',
   tokenExtractor,
   userExtractor,
-  checkAuthToken
+  getUserId
 )
 userRouter.get('/user/:id',
   tokenExtractor,

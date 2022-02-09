@@ -1,10 +1,10 @@
 const { Schema, model } = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
-const { validateEmail, validateUsername } = require('../utils/modelValidations')
+const { validateEmail } = require('../utils/modelValidations')
 
 const printerSchema = new Schema({
-  brandName: {
+  companyName: {
     type: String,
     trim: true,
     minlength: 1,
@@ -25,20 +25,15 @@ const printerSchema = new Schema({
   },
   printingPrice: {
     type: Number,
-    enum: ['1/2', '2/4', '3/6'],
     required: true
   },
   shippingPrice: {
-    Number,
-    required: true
-  },
-  deliveryTime: {
-    Number,
-    required: true
-  },
-  phone: {
     type: Number,
-    minlength: 9
+    required: true
+  },
+  shippingTime: {
+    type: Number,
+    required: true
   },
   address: {
     street: {
@@ -66,9 +61,9 @@ const printerSchema = new Schema({
 },
   { timestamps: true })
 
-userSchema.plugin(uniqueValidator)
+printerSchema.plugin(uniqueValidator)
 
-userSchema.set('toJSON', {
+printerSchema.set('toJSON', {
   transform: (doc, transformedObject) => {
     transformedObject.id = transformedObject._id
     delete transformedObject._id
@@ -77,6 +72,6 @@ userSchema.set('toJSON', {
   }
 })
 
-const User = model('User', userSchema)
+const Printer = model('Printer', printerSchema)
 
-module.exports = User
+module.exports = Printer

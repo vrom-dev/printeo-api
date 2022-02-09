@@ -18,7 +18,7 @@ const loginUser = async (req, res, next) => {
       : await bcrypt.compare(password, user.password)
 
     if (!(user && passwordCorrect)) {
-      return next(new Error('Invalid username or password'))
+      return next(new Error('Invalid email or password'))
     }
 
     const userObjForToken = {

@@ -17,7 +17,7 @@ const upload = multer({
   storage,
   limits: {
     fieldNameSize: 300,
-    fileSize: 20971520 // 20MB
+    fileSize: 50971520 // 50MB
   },
   fileFilter: function (req, file, cb) {
     const filetypes = /.stl/

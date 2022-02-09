@@ -9,13 +9,7 @@ const validatePassword = (password) => {
   return regex.test(password)
 }
 
-const validateUsername = (username) => {
-  const regex = /^[a-zA-Z0-9]{4,}$/
-  return regex.test(username)
-}
-
 module.exports = {
   validateEmail,
-  validatePassword,
-  validateUsername
+  validatePassword
 }

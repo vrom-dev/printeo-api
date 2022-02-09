@@ -1,4 +1,4 @@
-const checkAuthToken = async (req, res, next) => {
+const getUserId = async (req, res, next) => {
   const { user } = req
 
   res.status(200).send({
@@ -9,4 +9,4 @@ const checkAuthToken = async (req, res, next) => {
   })
 }
 
-module.exports = { checkAuthToken }
+module.exports = { getUserId }

@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
-const { validateEmail, validateUsername } = require('../utils/modelValidations')
+const { validateEmail } = require('../utils/modelValidations')
 
 const userSchema = new Schema({
   email: {
