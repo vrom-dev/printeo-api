@@ -28,7 +28,7 @@ const fileSchema = new Schema({
     required: true
   }
 },
-{ timestamps: true })
+  { timestamps: true })
 
 fileSchema.set('toJSON', {
   transform: (doc, transformedObject) => {

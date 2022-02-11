@@ -6,7 +6,8 @@ const userExtractor = require('../middlewares/userExtractor')
 const {
   createPrint,
   getAllPrintsByUser,
-  getPrint
+  getPrint,
+  editPrint
 } = require('../controllers/print')
 
 printRouter.post('/print',
@@ -24,6 +25,12 @@ printRouter.get('/print',
 printRouter.get('/print/:id',
   tokenExtractor,
   getPrint
+)
+
+printRouter.put('/print/:id',
+  tokenExtractor,
+  userExtractor,
+  editPrint
 )
 
 module.exports = printRouter

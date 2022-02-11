@@ -10,14 +10,22 @@ const orderSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Printer'
   },
-  shippingPrice: {
+  totalPrice: {
     type: Number,
+    required: true
+  },
+  payment: {
+    type: String,
     required: true
   },
   status: {
     type: String,
-    enum: ['pending', 'sent', 'received'],
-    default: 'pending'
+    enum: ['paid', 'sent', 'received'],
+    default: 'paid',
+    required: true
+  },
+  quantityDetails: {
+    type: Schema.Types.Mixed,
   },
   prints: [{
     type: Schema.Types.ObjectId,
