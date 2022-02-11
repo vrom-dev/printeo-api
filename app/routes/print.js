@@ -7,7 +7,8 @@ const {
   createPrint,
   getAllPrintsByUser,
   getPrint,
-  editPrint
+  editPrint,
+  deletePrint
 } = require('../controllers/print')
 
 printRouter.post('/print',
@@ -31,6 +32,12 @@ printRouter.put('/print/:id',
   tokenExtractor,
   userExtractor,
   editPrint
+)
+
+printRouter.delete('/print/:id',
+  tokenExtractor,
+  userExtractor,
+  deletePrint
 )
 
 module.exports = printRouter
