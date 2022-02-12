@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+const path = require('path')
 const Print = require('../../models/Print')
 const File = require('../../models/File')
 
@@ -27,6 +27,7 @@ const createPrint = async (req, res, next) => {
 
   try {
     const print = new Print({
+      name: path.parse(file.fileName).name,
       material,
       innerFill: innerFill / 100,
       accuracy,

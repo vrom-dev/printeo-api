@@ -4,7 +4,7 @@ const getAllPrintsByUser = async (req, res, next) => {
   const { user } = req
 
   try {
-    const prints = await Print.find({ user: user._id }).populate('file')
+    const prints = await Print.find({ user: user._id, isDeleted: false }).populate('file')
     res.status(200).send({
       status: 200,
       data: prints

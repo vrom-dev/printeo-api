@@ -1,6 +1,10 @@
 const { Schema, model } = require('mongoose')
 
 const printSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
   material: {
     type: String,
     required: true
@@ -27,6 +31,10 @@ const printSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false
   }
 },
   { timestamps: true }

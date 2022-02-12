@@ -1,9 +1,15 @@
 const { createPaymentSession } = require('./createPaymentSession')
 const { createOrder } = require('./createOrder')
-const { updateOrder } = require('./updateOrder')
+const { getOrder } = require('./getOrder')
+const { editOrderStatus } = require('./editOrderStatus')
+const { getAllOrdersByUser } = require('./getAllOrdersByUser')
+const { getAllOrdersByPrinter } = require('./getAllOrdersByPrinter')
 
 module.exports = {
   createPaymentSession,
   createOrder,
-  updateOrder
+  editOrderStatus,
+  getOrder,
+  getAllOrdersByUser,
+  getAllOrdersByPrinter
 }

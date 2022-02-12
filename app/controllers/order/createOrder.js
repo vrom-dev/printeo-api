@@ -7,11 +7,11 @@ const Printer = require('../../models/Printer')
 
 const createOrder = async (req, res, next) => {
   const {
-    printer,
-    totalPrice,
     payment,
+    printer,
+    prints,
     quantityDetails,
-    prints
+    totalPrice
   } = req.body
 
   const { user } = req

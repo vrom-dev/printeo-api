@@ -1,5 +1,4 @@
 const Print = require('../../models/Print')
-const File = require('../../models/File')
 
 const deletePrint = async (req, res, next) => {
   const { user } = req
@@ -12,13 +11,8 @@ const deletePrint = async (req, res, next) => {
   }
 
   try {
-    await Print.findByIdAndDelete(id)
-    await File.findByIdAndDelete(print.file)
-
-    res.status(204).send({
-      status: 204,
-      data: deletedPrint
-    })
+    await Print.findByIdAndUpdate(id, { isDeleted: true }, { new: true })
+    res.status(200).send({})
   } catch (e) {
     next(e)
   }
