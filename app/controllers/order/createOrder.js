@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 const Order = require('../../models/Order')
 const User = require('../../models/User')
 const Print = require('../../models/Print')

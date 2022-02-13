@@ -32,7 +32,7 @@ const editUser = async (req, res, next) => {
       address,
       phone,
     }
-    const updatedUser = await User.findOneAndUpdate(id, fieldsToUpdate, { new: true })
+    const updatedUser = await User.findByIdAndUpdate(id, fieldsToUpdate, { new: true })
     res.status(200).send({
       status: 200,
       data: updatedUser

@@ -27,7 +27,7 @@ const editPrint = async (req, res, next) => {
       accuracy,
       scale
     }
-    const updatedPrint = await Print.findOneAndUpdate(id, fieldsToUpdate, { new: true })
+    const updatedPrint = await Print.findByIdAndUpdate(id, fieldsToUpdate, { new: true })
 
     res.status(200).send({
       status: 200,

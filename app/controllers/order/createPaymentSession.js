@@ -1,4 +1,5 @@
-const stripe = require('stripe')('sk_test_51KRfbxJzeLnk59jCPJ9xXrFqDMEfs5vd4GddpPgfkQH93epGkKkRIGmFJ7jLn3ct5IqRMhF5HqeUWmoZZd6JADk6004vSd2yh2')
+const { STRIPE_KEY } = require('../../config')
+const stripe = require('stripe')(STRIPE_KEY)
 
 const calculateOrderAmount = (items) => {
   const { totalPrice } = items

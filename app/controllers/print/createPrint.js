@@ -1,4 +1,3 @@
-require('dotenv').config()
 const path = require('path')
 const Print = require('../../models/Print')
 const File = require('../../models/File')
